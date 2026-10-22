@@ -14,7 +14,7 @@
 using namespace std;
 
 int main() {
-  // Friendship level, species, and catchphrase
+  // Store friendship level, species, and catchphrase
   map<string, tuple<int, string, string>> villagers;
 
   villagers["Drago"] = make_tuple(5, "Alligator", "Snap to It!");
@@ -40,7 +40,7 @@ int main() {
     }
 
     if (choice == 1) {
-      // Add a villager with all three attributes
+      // Add a villager
       int level;
       string species;
       string catchphrase;
@@ -69,8 +69,15 @@ int main() {
         cout << name << " added." << endl;
       }
     } else if (choice == 2) {
-      // Deletion will be implemented in the next stage
-      cout << "Delete Villager coming next." << endl;
+      // Delete a villager by name
+      cout << "Villager name: ";
+      cin >> name;
+
+      if (villagers.erase(name) > 0) {
+        cout << name << " deleted." << endl;
+      } else {
+        cout << name << " not found." << endl;
+      }
     } else if (choice >= 3 && choice <= 5) {
       cout << "Villager name: ";
       cin >> name;
@@ -80,7 +87,7 @@ int main() {
       if (it == villagers.end()) {
         cout << name << " not found." << endl;
       } else if (choice == 3) {
-        // Increase friendship up to 10
+        // Increase friendship, maximum 10
         if (get<0>(it->second) < 10) {
           get<0>(it->second)++;
         }
@@ -88,7 +95,7 @@ int main() {
         cout << name << "'s friendship level: "
              << get<0>(it->second) << endl;
       } else if (choice == 4) {
-        // Decrease friendship down to 0
+        // Decrease friendship, minimum 0
         if (get<0>(it->second) > 0) {
           get<0>(it->second)--;
         }
@@ -107,7 +114,7 @@ int main() {
       cout << "Invalid choice." << endl;
     }
 
-    // Display all villagers after each operation
+    // Display all villagers after every operation
     if (choice >= 1 && choice <= 5) {
       cout << "\nVillager details:" << endl;
 
